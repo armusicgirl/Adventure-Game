@@ -186,7 +186,17 @@ namespace Adventure_Game
             {
                 info += "D ";
             }
+
+            if(this.roomItem.Count > 0)
+            {
+                info += "\n In the room you see:";
+                foreach(string item in roomItem)
+                {
+                    info += item + " ";
+                }
+            }
             return info;
         }
+
     }
 }
