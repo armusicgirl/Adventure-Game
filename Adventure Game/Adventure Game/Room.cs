@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 
 namespace Adventure_Game
 {
@@ -186,7 +182,18 @@ namespace Adventure_Game
             {
                 info += "D ";
             }
+
+            if(this.roomItem.Count > 0)
+            {
+                info += "\n In the room you see:";
+                foreach(int item in roomItem)
+                {
+                    info += item + " ";
+                }
+            }
+
             return info;
         }
+
     }
 }

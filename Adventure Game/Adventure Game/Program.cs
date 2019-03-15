@@ -34,8 +34,9 @@ namespace Adventure_Game
             string[] stringSeparators = new string[] {" ",",","."};
             string[] commandWords = commandString.Split(stringSeparators, StringSplitOptions.RemoveEmptyEntries);
 
+
             //Making objects for game
-            foreach(string word in commandWords)
+            foreach (string word in commandWords)
             {
                 Console.WriteLine(word);
             }
@@ -64,7 +65,6 @@ namespace Adventure_Game
                 Console.WriteLine(rooms[currentRoom].visitRoom());
                 Console.Write("Command (N,E,S,W,U,D,Q): ");
                 command = Console.ReadLine().ToUpper();
-                string[] commandWords = commandString.Split(stringSeparators, StringSplitOptions.RemoveEmptyEntries);
 
                 //Single letter Directrions
                 if (commandWords.Length == 1 && command == "N" || command == "E" || command == "S" || command == "W" || command == "U" || command == "D")
@@ -167,7 +167,7 @@ namespace Adventure_Game
                     {
                         if(commandWords[1] == "With")
                         {
-                            if ()
+                            if ( commandWords[2] == "SHOVEL")
                             {
 
                             }
@@ -193,3 +193,6 @@ namespace Adventure_Game
         }
     }
 }
+
+
+     
