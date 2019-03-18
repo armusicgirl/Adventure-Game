@@ -18,7 +18,6 @@ namespace Adventure_Game
         private int toUp;
         private int toDown;
         private bool visited;
-        public string roomItem;
 
         public int RoomNumber
         {
@@ -133,7 +132,6 @@ namespace Adventure_Game
             }
         }
 
-  
 
         public Room( int toNorth, int toEast, int toSouth, int toWest, int toUp, int toDown,
             string roomName, string roomDescription)
@@ -149,10 +147,6 @@ namespace Adventure_Game
             this.Visited = false;
         }
 
-        //public string roomItem()
-        //{
-
-        //}
         public string visitRoom()
         {
             string info = roomName;
@@ -162,27 +156,27 @@ namespace Adventure_Game
                 info += " " + roomDescription;
             }
             info += " You See an Exit to the: ";
-            if(this.toNorth >= 1)
+            if(this.toNorth >= 1 & this.toNorth != 16)
             {
                 info += "N ";
             }
-            if (this.toEast >= 1)
+            if (this.toEast >= 1 & this.toEast != 16)
             {
                 info += "E ";
             }
-            if (this.toSouth >= 1)
+            if (this.toSouth >= 1 & this.toSouth != 16)
             {
                 info += "S ";
             }
-            if (this.toWest >= 1)
+            if (this.toWest >= 1 & this.toWest != 16)
             {
                 info += "W ";
             }
-            if (this.toUp >= 1)
+            if (this.toUp >= 1 & this.toUp != 16)
             {
                 info += "U ";
             }
-            if (this.toDown >= 1)
+            if (this.toDown >= 1 & this.toDown != 16 & this.toDown < 29)
             {
                 info += "D ";
             }
