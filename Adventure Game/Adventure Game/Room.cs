@@ -1,6 +1,6 @@
-﻿using System;
+﻿using System.Linq;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,7 +18,7 @@ namespace Adventure_Game
         private int toUp;
         private int toDown;
         private bool visited;
-        public string roomItem;
+        public List<ItemClass> roomItem = new List<ItemClass>();
 
         public int RoomNumber
         {
@@ -162,19 +162,19 @@ namespace Adventure_Game
                 info += " " + roomDescription;
             }
             info += " You See an Exit to the: ";
-            if(this.toNorth >= 1)
+            if(this.toNorth >= 1 && this.toNorth <= 100)
             {
                 info += "N ";
             }
-            if (this.toEast >= 1)
+            if (this.toEast >= 1 && this.toEast <= 100)
             {
                 info += "E ";
             }
-            if (this.toSouth >= 1)
+            if (this.toSouth >= 1 && this.toSouth <= 100)
             {
                 info += "S ";
             }
-            if (this.toWest >= 1)
+            if (this.toWest >= 1 && this.toWest <= 100)
             {
                 info += "W ";
             }
@@ -186,7 +186,19 @@ namespace Adventure_Game
             {
                 info += "D ";
             }
+
+            if(this.roomItem.Count > 0)
+            {
+                info += "\n In the room you see:";
+                foreach(ItemClass item in roomItem)
+                {
+                    info += item.ItemName + " ";
+                }
+            }
+
             return info;
         }
+
     }
 }
+
