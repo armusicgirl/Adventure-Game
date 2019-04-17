@@ -5,15 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Adventure_Game
-{
+{                   
+    //ARIA RICHARDS
+    //ROOM GAME
     class Program
     {
         static void Main(string[] args)
         {
             List<ItemClass> ItemClass = new List<ItemClass>();
 
-
-
+            //MAP
             Room[] rooms = new Room[335]; // N, E, S, W, U, D
             //Hidden rooms
             rooms[31] = new Room(0, 10, 0, 0, 0, 0, "Vault:", "Walls have china cabinets with jewerly in them." +
@@ -238,11 +239,23 @@ namespace Adventure_Game
                             rooms[currentRoom].ToDown = rooms[currentRoom].ToDown - 200;
                         }
                     }
+
+                    else if (commandWords[0] == "HELP")
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine("Type N, S, E, W, U, D to move through rooms");
+                        Console.WriteLine("Search, Unlock With ____, Get ___, Drop ____, Read Note, Info ____, Dig With ____, inventory ");
+                        Console.WriteLine();
+                    }
+
+                    //Command error catch
                     else if (commandWords[0] == "DIG")
                     {
+                        Console.WriteLine();
                         Console.WriteLine("What would you like to dig WITH? ");
                         Console.WriteLine();
                     }
+                    
                     else if (commandWords[0] == "Unlock")
                     {
                         Console.WriteLine("What would you like to unlock that WITH? ");
@@ -263,6 +276,9 @@ namespace Adventure_Game
                         Console.WriteLine("What would you like to read? ");
                         Console.WriteLine();
                     }
+
+                    // commands with at least three words
+                    //check to see what you are carrying
                     else if (commandWords[0].Length >= 3 && commandWords[0].Substring(0, 3) == "INV")
                     {
                         Console.WriteLine("You are carrying the following Items: ");
@@ -279,6 +295,8 @@ namespace Adventure_Game
                             {
                                 Console.WriteLine(item.ItemName);
                             }
+                            Console.WriteLine();
+
                         }
 
                     }
@@ -320,9 +338,32 @@ namespace Adventure_Game
                             Console.WriteLine();
                         }
                     }
+                    else if (commandWords[0] == "INFO" && commandWords[1] == "SHOVEL")
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine("SHOVEL: Useful For Digging");
+                        Console.WriteLine();
+
+                    }
+
+                    else if (commandWords[0] == "INFO" && commandWords[1] == "KEY")
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine("KEY: A Shiny triangle shaped key");
+                        Console.WriteLine();
+
+                    }
+                    else if (commandWords[0] == "INFO" && commandWords[1] == "DIAMOND")
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine("DIAMOND: A precious gemstone");
+                        Console.WriteLine();
+                    }
+
                     else if (commandWords[0] == "READ" && commandWords[1] == "NOTE")
                     {
                         Console.WriteLine(rooms[currentRoom].ReadNote());
+                        Console.WriteLine();
                     }
                 }
                 else if (commandWords.Length == 3)

@@ -199,6 +199,7 @@ namespace Adventure_Game
             }
             return info;
         }
+
         public string ReadNote()
         {
             string info = " ";
