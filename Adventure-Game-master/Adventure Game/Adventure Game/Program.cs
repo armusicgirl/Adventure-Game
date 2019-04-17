@@ -32,6 +32,7 @@ namespace Adventure_Game
             rooms[2] = new Room(7, 3, 0, 1, 22, 0, "Grand Stair Case: ", "Looking around there is beautiful artwork " +
                 "on the walls, and not to mention the giant spiral staircase in the middle.");
             rooms[3] = new Room(0, 4, 0, 2, 0, 0, "Music Room: ", "A nice sitting room with an electronic piano playing 80's music");
+                    //items
                     rooms[3].roomItem.Add(new ItemClass(1, "KEY", "A Shiny triangle shaped key", 0, 10));
                     rooms[3].roomItem.Add(new ItemClass(2, "DIAMOND", "A precious gemstone", 5, 10));
                     rooms[3].roomItem.Add(new ItemClass(3, "SHOVEL", "Useful For Digging", 0, 10));
@@ -239,12 +240,18 @@ namespace Adventure_Game
                             rooms[currentRoom].ToDown = rooms[currentRoom].ToDown - 200;
                         }
                     }
+                    else if (commandWords[0] == "LOOK")
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine(rooms[currentRoom].RoomDescription);
+                        Console.WriteLine();
+                    }
 
                     else if (commandWords[0] == "HELP")
                     {
                         Console.WriteLine();
                         Console.WriteLine("Type N, S, E, W, U, D to move through rooms");
-                        Console.WriteLine("Search, Unlock With ____, Get ___, Drop ____, Read Note, Info ____, Dig With ____, inventory ");
+                        Console.WriteLine("Search, Unlock With ____, Get ___, Drop ____, Read Note, Info ____, Dig With ____, inventory, look ");
                         Console.WriteLine();
                     }
 
@@ -255,7 +262,7 @@ namespace Adventure_Game
                         Console.WriteLine("What would you like to dig WITH? ");
                         Console.WriteLine();
                     }
-                    
+
                     else if (commandWords[0] == "Unlock")
                     {
                         Console.WriteLine("What would you like to unlock that WITH? ");
@@ -271,7 +278,7 @@ namespace Adventure_Game
                         Console.WriteLine("What ITEM would you like to drop? ");
                         Console.WriteLine();
                     }
-                    else if(commandWords[0] == "READ")
+                    else if (commandWords[0] == "READ")
                     {
                         Console.WriteLine("What would you like to read? ");
                         Console.WriteLine();
@@ -322,21 +329,85 @@ namespace Adventure_Game
                             Console.WriteLine();
                         }
                     }
-                   else if (commandWords[0] == "DROP")
+                    if (commandWords[0] == "DROP")
                     {
-                        if (inventory.Find(item => item.ItemName == commandWords[1]) != null)
+                        if (inventory.FindIndex(item => item.ItemName == commandWords[1]) >= 0)
                         {
-                            rooms[currentRoom].roomItem.Add(rooms[currentRoom].roomItem.Find(item => item.ItemName == commandWords[1]));
-                            // rooms[currentRoom].roomItem.Add(commandWords[1]);
-                            //inventory.Remove(commandWords[1]);
-                            inventory.RemoveAt(rooms[currentRoom].roomItem.FindIndex(item => item.ItemName == commandWords[1]));
+                            rooms[currentRoom].roomItem.Add(inventory.Find(item => item.ItemName == commandWords[1]));
+                            inventory.Remove(inventory.Find(item => item.ItemName == commandWords[1]));
+                            Console.WriteLine("You dropped the " + commandWords[1]);
                         }
-
                         else
                         {
-                            Console.WriteLine("I do not find " + commandWords[1] + " in your inventory!");
+                            Console.WriteLine("There is not a " + commandWords[1] + "in your inventory!");
+                            Console.WriteLine();
+
+                        }
+                    }
+                    /*else if (commandWords[0] == "DROP")
+                     {
+                         if (inventory.Find(item => item.ItemName == commandWords[1]) != null)
+                         {
+                             rooms[currentRoom].roomItem.Add(rooms[currentRoom].roomItem.Find(item => item.ItemName == commandWords[1]));
+                             // rooms[currentRoom].roomItem.Add(commandWords[1]);
+                             //inventory.Remove(commandWords[1]);
+                             inventory.RemoveAt(rooms[currentRoom].roomItem.FindIndex(item => item.ItemName == commandWords[1]));
+                         }
+
+                         else
+                         {
+                             Console.WriteLine("I do not find " + commandWords[1] + " in your inventory!");
+                             Console.WriteLine();
+                         }
+                     }*/
+                    else if(commandWords[0] == "GO")
+                    {
+                        if (commandWords[1] == "N" && rooms[currentRoom].ToNorth > 0 && rooms[currentRoom].ToNorth < 100 ||
+                            commandWords[1] == "NORTH" && rooms[currentRoom].ToNorth > 0 && rooms[currentRoom].ToNorth < 100)
+                        {
+                            currentRoom = rooms[currentRoom].ToNorth;
                             Console.WriteLine();
                         }
+                        else if (commandWords[1] == "E" && rooms[currentRoom].ToEast > 0 && rooms[currentRoom].ToEast < 100 ||
+                            commandWords[1] == "EAST" && rooms[currentRoom].ToEast > 0 && rooms[currentRoom].ToEast < 100)
+                        {
+                            currentRoom = rooms[currentRoom].ToEast;
+                            Console.WriteLine();
+
+                        }
+                        else if (commandWords[1] == "S" && rooms[currentRoom].ToSouth > 0 && rooms[currentRoom].ToSouth < 100 ||
+                            commandWords[1] == "SOUTH" && rooms[currentRoom].ToSouth > 0 && rooms[currentRoom].ToSouth < 100)
+                        {
+                            currentRoom = rooms[currentRoom].ToSouth;
+                            Console.WriteLine();
+
+                        }
+                        else if (commandWords[1] == "W" && rooms[currentRoom].ToWest > 0 && rooms[currentRoom].ToWest < 100 ||
+                            commandWords[1] == "WEST" && rooms[currentRoom].ToWest > 0 && rooms[currentRoom].ToWest < 100)
+                        {
+                            currentRoom = rooms[currentRoom].ToWest;
+                            Console.WriteLine();
+
+                        }
+                        else if (commandWords[1] == "U" && rooms[currentRoom].ToUp > 0 && rooms[currentRoom].ToUp < 100 ||
+                            commandWords[1] == "UP" && rooms[currentRoom].ToUp > 0 && rooms[currentRoom].ToUp < 100)
+                        {
+                            currentRoom = rooms[currentRoom].ToUp;
+                            Console.WriteLine();
+
+                        }
+                        else if (commandWords[1] == "D" && rooms[currentRoom].ToDown > 0 && rooms[currentRoom].ToDown < 100 ||
+                            commandWords[1] == "Down" && rooms[currentRoom].ToDown > 0 && rooms[currentRoom].ToDown < 100)
+                        {
+                            currentRoom = rooms[currentRoom].ToDown;
+                            Console.WriteLine();
+                        }
+                        else
+                        {
+                            Console.WriteLine("Sorry, You can't go that way ");
+                            Console.WriteLine();
+                        }
+                    
                     }
                     else if (commandWords[0] == "INFO" && commandWords[1] == "SHOVEL")
                     {
